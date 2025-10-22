@@ -1,0 +1,47 @@
+services:
+  - type: web
+    name: crypto-tracker
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn crypto_tracker_project.crypto_tracker.wsgi:application
+gunicorn crypto_tracker.wsgi:application --chdir crypto_tracker_project
+
+
+tejasrichandu75@gmail.com  Portfolio | contact: 8555982489 | ˙¡location:  Bhimavaram, Andhra Pradesh |  LinkedIn: Linkedin | ¿  □      GitHub: github.com/phoenixpeacock
+
+
+
+https://jitter.video/export/?file=ZzNRXa9yO0DtAv4Dns05bm0X&artboardId=xr0VHPWP7KhwrrNJBeoWX&profile=mp4&width=1280&height=720
+
+
+
+\begin{joblong}{Foundations of CyberSecurity – Google
+}{13-Dec-2023 - 17-Jul-2024}
+ I completed a cybersecurity internship program with Google, where I learned about protecting systems, networks, and data from security threats. I gained knowledge in areas such as network security, cryptography, threat analysis, and incident response. The internship also gave me hands-on practice in identifying vulnerabilities, analyzing risks, and applying security measures to safeguard information. This experience strengthened my technical skills and understanding of real-world cybersecurity practices.
+\end{joblong}
+
+
+
+
+Content Marketing & Reels Creation 
+Content Writing & Storytelling
+Social Media Engagement 
+Client Communication & Presentation
+Lead Research & Market Analysis 
+Collaboration & Teamwork
+Motion Designer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://jitter.video/file/?id=ZzNRXa9yO0DtAv4Dns05bm0X&nodeId=xr0VHPWP7KhwrrNJBeoWX

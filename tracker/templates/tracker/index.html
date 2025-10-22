@@ -1,0 +1,117 @@
+<!-- index.html placeholder -->
+{% extends 'tracker/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-search me-2"></i>Search Cryptocurrency</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" id="cryptoForm">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-8">
+                            {{ form.cryptocurrency }}
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-search me-2"></i>Get Price
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {% if crypto_data %}
+        <div class="card mt-4" id="priceCard">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4><i class="fab fa-bitcoin me-2"></i>{{ crypto_data.name }} ({{ crypto_data.symbol|upper }})</h4>
+                <button class="btn btn-sm btn-outline-primary" id="refreshBtn" data-crypto-id="{{ selected_crypto.id }}">
+                    <i class="fas fa-sync-alt me-1"></i>Refresh
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="price-item">
+                            <h5>Current Price</h5>
+                            <h2 class="text-primary" id="currentPrice">${{ crypto_data.price|floatformat:8 }}</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="price-item">
+                            <h5>24h Change</h5>
+                            <h3 class="{% if crypto_data.price_change_24h >= 0 %}text-success{% else %}text-danger{% endif %}" id="priceChange">
+                                {{ crypto_data.price_change_24h|floatformat:2 }}%
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="market-stat">
+                            <h6>Market Cap</h6>
+                            <p class="h5" id="marketCap">
+                                {% if crypto_data.market_cap %}
+                                    ${{ crypto_data.market_cap|floatformat:0 }}
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="market-stat">
+                            <h6>24h Volume</h6>
+                            <p class="h5" id="volume24h">
+                                {% if crypto_data.volume_24h %}
+                                    ${{ crypto_data.volume_24h|floatformat:0 }}
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <a href="{% url 'tracker:price_history' selected_crypto.id %}" class="btn btn-info">
+                        <i class="fas fa-chart-line me-2"></i>View Price History
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-history me-2"></i>Recent Searches</h5>
+            </div>
+            <div class="card-body">
+                {% if recent_searches %}
+                    <div class="list-group list-group-flush">
+                        {% for search in recent_searches %}
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>{{ search.cryptocurrency.name }}</strong>
+                                <small class="text-muted d-block">{{ search.searched_at|timesince }} ago</small>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">{{ search.cryptocurrency.symbol|upper }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-muted">No recent searches</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

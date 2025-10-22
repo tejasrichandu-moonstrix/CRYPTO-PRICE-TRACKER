@@ -1,4 +1,4 @@
-# settings.py — Django Settings for Crypto Tracker
+# crypto_tracker/settings.py — Django Settings for Crypto Tracker
 
 import os
 from pathlib import Path
@@ -110,7 +110,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ---------------------------
 # CoinAPI settings
 # ---------------------------
-COINAPI_KEY = config('COINAPI_KEY')
+COINAPI_KEY = config('COINAPI_KEY', default='')
 COINAPI_URL = 'https://rest.coinapi.io/v1'
 
 # ---------------------------
